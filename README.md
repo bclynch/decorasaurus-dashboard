@@ -1,6 +1,23 @@
-# DecorasaurusDashboard
+# Decorasaurus Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
+## Todos
+- Setup a router guard with login auth page
+- Home orders page with a bit of reporting / graphs
+- Orders page with table of orders
+  - Setup sorting
+  - Setup filtering
+  - Export to CSV
+- Order item page
+- Search capability
+
+## Inspiration
+  - Will need a role for our poster producer accounts that would have access to orders, but probably not the rest and then an admin dash which has orders, customers, sales, usage analytics, reports, and other good stuff
+  - http://help.wanelo.com/customer/portal/articles/1790355-how-do-i-fulfill-an-order-
+  - Shopify has solid responsive dash too
+  - Moltin
+  - Stripe is nice
+  - Nice to export to csv
+  - Filters of orders by date, fulfilled etc
 
 ## Development server
 
@@ -22,6 +39,8 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+### Updating Production
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Web app uses a service worked so we need to break the cache when we update. Change the cache version in service-worker.js to do this and prompt users to do the same.
+- Run `$ ng build --prod` to run an AoT build
+- Use SFTP (cyber duck) to replace the www folder in /var/www/packonmyback.com/html on the server
