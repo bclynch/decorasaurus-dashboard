@@ -13,15 +13,12 @@ import { Apollo } from 'apollo-angular';
 export class ProducerService {
 
   producerUuid: string;
-  currency: 'USD' | 'EUR' = 'EUR';
-  isReloading = false;
   producerObject: {
     id: string;
     email: string;
   };
 
   public producerToken: BehaviorSubject<string>;
-  // private _subject: BehaviorSubject<string>;
 
   constructor(
     private apiService: APIService,
@@ -30,88 +27,49 @@ export class ProducerService {
     private router: Router,
     private apollo: Apollo
   ) {
-    // this._subject = new BehaviorSubject<string>(null);
     this.producerToken = new BehaviorSubject<string>(null);
   }
 
   fetchUser(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.checkNewUser().then(
-        (isNew) => {
-          console.log('FETCH USER RESULT: ', isNew);
-          if (isNew) {
-            resolve();
-          } else {
-            // uses token to check if logged in / expired
-            this.apiService.getCurrentProducer().valueChanges.subscribe(({ data }) => {
-              console.log(data);
+      this.apiService.getCurrentProducer().valueChanges.subscribe(({ data }) => {
+        console.log(data);
 
-              if (!this.isReloading) {
-                // if logged in set our producer id and set the token
-                if (data.currentProducer) {
-                  this.producerObject = data.currentProducer;
-                  console.log(this.producerObject);
-                  const cookieToken = this.cookieService.get('decorasaurus-token');
-                  if (cookieToken) this.producerToken.next(cookieToken);
-                } else {
-                  // if it doesnt exist dump the token
-                  this.cookieService.delete('decorasaurus-token');
-                  this.cookieService.delete('decorasaurus-producer-id');
-                }
-              }
-              resolve();
-            });
-          }
+        // if logged in set our producer id and set the token
+        if (data.currentProducer) {
+          this.producerObject = data.currentProducer;
+          console.log(this.producerObject);
+          const cookieToken = this.cookieService.get('decorasaurus-token');
+          if (cookieToken) this.producerToken.next(cookieToken);
+        } else {
+          // if it doesnt exist dump the token
+          // this.cookieService.delete('decorasaurus-token');
         }
-      );
+        resolve();
+      });
     });
   }
 
-  private checkNewUser(): Promise<boolean> {
-    // check if cookie identifying user exists
-    // If it does not we have a new user and need to create an ID for them + cart
-    return new Promise((resolve, reject) => {
-      if (this.cookieService.get('decorasaurus-user')) {
-        this.producerUuid = this.cookieService.get('decorasaurus-user');
-        resolve(false);
-      } else {
-        const userUuid = uuid();
-        this.cookieService.set( 'decorasaurus-user', userUuid );
-        this.producerUuid = userUuid;
-
-        resolve(true);
-      }
-    });
-  }
-
-  createProducer(data): void {
-    console.log(data);
-    this.apiService.registerProducer(data.email, data.matchingPassword.password).subscribe(
+  createProducer(email: string, password: string): void {
+    this.apiService.registerProducer(email, password).subscribe(
       () =>  {
-        this.loginProducer(data.email, data.matchingPassword.password).then(
-          (result) => console.log(result)
-        );
+        this.loginProducer(email, password);
       },
       err => console.log(err)
     );
   }
 
-  loginProducer(email: string, password: string): Promise<void> {
-    return new Promise((resolve, reject) => {
+  loginProducer(email: string, password: string) {
       this.apiService.authProducer(email, password).subscribe(({data}) => {
         console.log(data);
-        if (data.authenticateUserCustomer.jwtToken) {
+        if (data.authenticateUserProducer.jwtToken) {
           // reset apollo cache and refetch queries
           this.apollo.getClient().resetStore();
-
           this.cookieService.set('decorasaurus-token', data.authenticateUserProducer.jwtToken);
           this.producerToken.next(data.authenticateUserProducer.jwtToken);
-          // this.cookieService.set( 'decorasaurus-customer-id', resp.token.customer_id );
 
-          // reload window to update db role
-          this.isReloading = true;
+          this.router.navigateByUrl('/');
           window.location.reload();
-          resolve();
         } else {
           // incorrect login warning
           // this.snackBar.openFromComponent(CustomerStateSnackbar, {
@@ -123,28 +81,23 @@ export class ProducerService {
         }
       }, (error) => {
         console.log('there was an error sending the query', error);
-        reject(error);
       });
-    });
   }
 
-  logoutProducer(): Promise<void> {
-    return new Promise((resolve) => {
-      this.cookieService.delete('decorasaurus-token');
-      this.cookieService.delete('decorasaurus-producer-id');
-      this.producerToken.next(null);
-      this.producerObject = null;
+  logoutProducer() {
+    this.cookieService.delete('decorasaurus-token');
+    this.producerToken.next(null);
+    this.producerObject = null;
 
-      // reset apollo cache and refetch queries
-      this.apollo.getClient().resetStore();
+    // reset apollo cache and refetch queries
+    this.apollo.getClient().resetStore();
 
-      // this.snackBar.openFromComponent(CustomerStateSnackbar, {
-      //   duration: 3000,
-      //   verticalPosition: 'top',
-      //   data: { message: 'Successfully logged out' },
-      //   panelClass: ['snackbar-theme']
-      // });
-      resolve();
-    });
+    this.router.navigateByUrl('/login');
+    // this.snackBar.openFromComponent(CustomerStateSnackbar, {
+    //   duration: 3000,
+    //   verticalPosition: 'top',
+    //   data: { message: 'Successfully logged out' },
+    //   panelClass: ['snackbar-theme']
+    // });
   }
 }

@@ -1,7 +1,19 @@
 <div class="dashboardContainer" [class.isMobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1>Decorasaurus Dashboard</h1>
+    <div>
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1>Decorasaurus Dashboard</h1>
+    </div>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="producerService.logoutProducer()">
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenavContainer" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">

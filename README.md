@@ -1,14 +1,21 @@
 # Decorasaurus Dashboard
 
 ## Todos
-- Setup a router guard with login auth page
+- ~~Setup a router guard with login auth page~~
+  - Can be finicky on login
 - Home orders page with a bit of reporting / graphs
 - Orders page with table of orders
   - ~~Setup sorting~~
   - Setup filtering
+    - Just a dynamic call to the generic api endpoint with our filter options. Some simple stuff like by status, shipped, and maybe created (last day, week, etc)
   - Export to CSV
+    - https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
 - ~~Order item page~~
-- Search capability
+- ~~Search capability~~
+- Ability to edit status / shipping of orders
+- Ability to print shipping labels
+  - https://www.easypost.com/
+- Consider adding status to individual order items because maybe one is done and not the other.
 
 ## Inspiration
   - Will need a role for our poster producer accounts that would have access to orders, but probably not the rest and then an admin dash which has orders, customers, sales, usage analytics, reports, and other good stuff

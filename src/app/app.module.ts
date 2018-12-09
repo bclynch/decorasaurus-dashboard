@@ -19,6 +19,7 @@ import { SettingsService } from './services/settings.service';
 import { ProducerService } from './services/producer.service';
 import { APIService } from './services/api.service';
 import { OrderService } from './services/order.service';
+import { RoleGuardService } from './services/roleGuard.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { OrderService } from './services/order.service';
     SettingsService,
     ProducerService,
     APIService,
-    OrderService
+    OrderService,
+    RoleGuardService
   ],
   bootstrap: [AppComponent]
 })

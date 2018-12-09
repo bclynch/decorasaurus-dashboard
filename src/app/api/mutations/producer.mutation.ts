@@ -2,10 +2,8 @@ import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 
 export const registerUserProducerMutation: DocumentNode = gql`
-  mutation registerUserProducer($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+  mutation registerUserProducer($email: String!, $password: String!) {
     registerUserProducer(input: {
-      firstName: $firstName,
-      lastName: $lastName,
       email: $email,
       password: $password
     })
