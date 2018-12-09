@@ -49,7 +49,7 @@
           <!-- PDF Column -->
           <ng-container matColumnDef="pdfUrl">
             <th mat-header-cell *matHeaderCellDef > PDF Url </th>
-            <td mat-cell *matCellDef="let element"><a [href]="element.pdfUrl" target="_blank">Download</a></td>
+            <td mat-cell *matCellDef="let element"><a [href]="element.pdfUrl" target="_blank"><button mat-button color="primary">Download</button></a></td>
           </ng-container>
         
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -60,21 +60,25 @@
     <div class="section shippingSection">
       <h3 class="title">Shipping</h3>
       <div class="content">
-        <div class="recipientSection">
-          <div class="label">Recipient: </div>
-          <div>
-            <div>{{order.addressByShippingAddressId.firstName}} {{order.addressByShippingAddressId.lastName}}</div>
+        <div class="wrapper">
+          <div class="recipientSection">
+            <div class="label">Recipient: </div>
+            <div>
+              <div>{{order.addressByShippingAddressId.firstName}} {{order.addressByShippingAddressId.lastName}}</div>
+            </div>
           </div>
-        </div>
-        <div class="addressSection">
-          <div class="label">Recipient: </div>
-          <div>
-            <div>{{order.addressByShippingAddressId.line1}}</div>
-            <div *ngIf="order.addressByShippingAddressId.line2">{{order.addressByShippingAddressId.line2}}</div>
-            <div>{{order.addressByShippingAddressId.city}}, {{order.addressByShippingAddressId.country}}</div>
-            <div>{{order.addressByShippingAddressId.postcode}}</div>
+          <div class="addressSection">
+            <div class="label">Recipient: </div>
+            <div>
+              <div>{{order.addressByShippingAddressId.line1}}</div>
+              <div *ngIf="order.addressByShippingAddressId.line2">{{order.addressByShippingAddressId.line2}}</div>
+              <div>{{order.addressByShippingAddressId.city}}, {{order.addressByShippingAddressId.country}}</div>
+              <div>{{order.addressByShippingAddressId.postcode}}</div>
+            </div>
           </div>
-        </div>
+        </div>  
+        <button mat-flat-button color="primary" (click)="createShippingLabel()">Create Shipping Label</button>
+        <button mat-flat-button color="primary" (click)="validateAddress()">Validate Address</button>
       </div>
     </div>
   </div>

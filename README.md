@@ -14,7 +14,15 @@
 - ~~Search capability~~
 - Ability to edit status / shipping of orders
 - Ability to print shipping labels
-  - https://www.easypost.com/
+  - https://goshippo.com/
+  - ~~Create label~~
+  - Expand data model to include shipping info
+  - ~~Verify address~~
+  - Tracking
+  - Webhook. Try and wire up with email to send something out when it changes to order has shipped
+    - Create webhook here https://app.goshippo.com/settings/api/
+    - For tracking status updates. The POST request body will contain a JSON of the Tracking object.
+    - Server needs to be live with a real ip address to test
 - Consider adding status to individual order items because maybe one is done and not the other.
 
 ## Inspiration

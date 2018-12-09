@@ -73,4 +73,65 @@ export class APIService {
       }
     });
   }
+
+  // shippo
+  createShippingLabel(addressFrom, addressTo, parcels) {
+    return this.http.post(`${ENV.apiBaseURL}/shippo/create-label`, { addressFrom, addressTo, parcels })
+    .pipe(map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      )
+    ).pipe(catchError(
+        (error: Response) => {
+          return Observable.throw('Something went wrong');
+        }
+    ));
+  }
+
+  validateAddress(address) {
+    return this.http.post(`${ENV.apiBaseURL}/shippo/validate-address`, { address })
+    .pipe(map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      )
+    ).pipe(catchError(
+        (error: Response) => {
+          return Observable.throw('Something went wrong');
+        }
+    ));
+  }
+
+  createRefund(transactionId: string) {
+    return this.http.post(`${ENV.apiBaseURL}/shippo/create-refund-label`, { transactionId })
+    .pipe(map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      )
+    ).pipe(catchError(
+        (error: Response) => {
+          return Observable.throw('Something went wrong');
+        }
+    ));
+  }
+
+  trackPackage(trackingNumber: string, carrier: string) {
+    return this.http.post(`${ENV.apiBaseURL}/shippo/track`, { trackingNumber, carrier })
+    .pipe(map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      )
+    ).pipe(catchError(
+        (error: Response) => {
+          return Observable.throw('Something went wrong');
+        }
+    ));
+  }
 }
