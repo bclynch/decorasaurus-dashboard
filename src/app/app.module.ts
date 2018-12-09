@@ -18,6 +18,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SettingsService } from './services/settings.service';
 import { ProducerService } from './services/producer.service';
 import { APIService } from './services/api.service';
+import { OrderService } from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { APIService } from './services/api.service';
     CookieService,
     SettingsService,
     ProducerService,
-    APIService
+    APIService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

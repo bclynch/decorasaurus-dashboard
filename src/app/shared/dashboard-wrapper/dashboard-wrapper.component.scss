@@ -1,0 +1,48 @@
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  h1 {
+    margin-left: 8px;
+  }
+  
+  .sidenavContainer {
+    flex: 1;
+
+    mat-sidenav {
+      background: var(--color-tertiary);
+      border-right: solid 1px var(--color-tertiary);
+    }
+    .drawerItem {
+      padding: 15px 50px 15px 15px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      mat-icon {
+        margin-right: 10px;
+      }
+    }
+    .drawerItem:hover {
+      opacity: .7;
+    }
+  }
+  mat-sidenav-content {
+    background: var(--color-tertiary);
+  }
+  &.isMobile {
+
+    .toolbar {
+      position: fixed;
+      z-index: 2;
+    }
+    .sidenavContainer {
+      flex: 1 0 auto;
+    }
+  }
+}

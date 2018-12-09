@@ -4,10 +4,10 @@
 - Setup a router guard with login auth page
 - Home orders page with a bit of reporting / graphs
 - Orders page with table of orders
-  - Setup sorting
+  - ~~Setup sorting~~
   - Setup filtering
   - Export to CSV
-- Order item page
+- ~~Order item page~~
 - Search capability
 
 ## Inspiration

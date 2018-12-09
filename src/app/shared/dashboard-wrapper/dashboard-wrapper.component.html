@@ -1,0 +1,25 @@
+<div class="dashboardContainer" [class.isMobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1>Decorasaurus Dashboard</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenavContainer" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav 
+      #snav 
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      [opened]="true"
+    >
+      <div class="drawerItem" *ngFor="let option of navOptions" (click)="router.navigateByUrl('/' + option.value)">
+        <mat-icon>{{option.icon}}</mat-icon>
+        <div>{{option.label}}</div>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

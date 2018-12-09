@@ -1,0 +1,61 @@
+.orderContainer {
+  background: var(--color-tertiary);
+  padding: 10px;
+
+  .label {
+    color:  #888;
+  }
+  .orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+  }
+  .section {
+
+    .title {
+      font-size: 13px;
+    }
+    .content {
+      background: white;
+      border: 1px solid #dadada;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    &.itemsSection {
+  
+      table {
+        width: 100%;
+      }
+    }
+    &.shippingSection {
+
+      .content {
+        display: flex;
+        justify-content: space-around;
+
+        > div {
+          display: flex;
+
+          .label {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+    &.detailsSection {
+
+      .row {
+        display: flex;
+        align-items: center;
+
+        > div:first-child {
+          margin-right: 5px;
+        }
+      }
+      .row:first-child {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

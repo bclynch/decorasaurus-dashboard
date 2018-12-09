@@ -27,9 +27,17 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 :root {
   --color-primary: #4CAF50;
   --color-secondary: #92e89e;
-  --color-tertiary: #8dd2c0;
+  --color-tertiary: #E3E8EE;
   --color-white: white;
   --color-black: black;
   --color-border: #ddd;
   --height-navbar: 54px;
+}
+
+mat-form-field {
+
+  .mat-form-field-infix {
+    display: flex!important;
+    align-items: center;
+  }
 }

@@ -14,6 +14,7 @@ import {
 } from '../api/mutations/producer.mutation';
 
 import { currentProducerQuery } from '../api/queries/producer.query';
+import { allOrdersQuery, orderByIdQuery } from '../api/queries/order.query';
 
 @Injectable()
 export class APIService {
@@ -31,6 +32,19 @@ export class APIService {
   getCurrentProducer(): any {
     return this.apollo.watchQuery<any>({
       query: currentProducerQuery
+    });
+  }
+  getAllOrders(): any {
+    return this.apollo.watchQuery<any>({
+      query: allOrdersQuery
+    });
+  }
+  getOrderById(orderId: string): any {
+    return this.apollo.watchQuery<any>({
+      query: orderByIdQuery,
+      variables: {
+        orderId
+      }
     });
   }
 

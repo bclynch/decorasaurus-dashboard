@@ -1,0 +1,21 @@
+.ordersContainer {
+  padding: 10px;
+  
+  mat-form-field {
+    cursor: pointer;
+    width: 100%;
+  }
+  table {
+    width: 100%;
+
+    .orderRow {
+      cursor: pointer;
+    }
+  }
+  @media (min-width: 768px) {
+    mat-form-field {
+      cursor: pointer;
+      width: 300px;
+    }
+  }
+}

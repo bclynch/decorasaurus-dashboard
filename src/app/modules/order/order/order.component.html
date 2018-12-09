@@ -1,0 +1,82 @@
+<app-dashboard-wrapper>
+  <div class="orderContainer" *ngIf="order">
+    <div class="orderHeader">
+      <div>{{order.id}}</div>
+      <div>{{order.status}}</div>
+    </div>
+    <div class="section detailsSection">
+      <h3 class="title">Order Details</h3>
+      <div class="content">
+        <div class="row">
+          <div class="label">ID: </div>
+          <div>{{order.id}}</div>
+        </div>
+        <div class="row">
+          <div class="label">Created: </div>
+          <div>{{order.createdAt | date: 'M/d/yy, H:mm'}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="section itemsSection">
+      <h3 class="title">Items</h3>
+      <div class="content">
+        <table mat-table [dataSource]="dataSource">
+  
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef > Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+        
+          <!-- Id Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef > Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+        
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef > Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+          </ng-container>
+    
+          <!-- PDF Column -->
+          <ng-container matColumnDef="pdfUrl">
+            <th mat-header-cell *matHeaderCellDef > PDF Url </th>
+            <td mat-cell *matCellDef="let element"><a [href]="element.pdfUrl" target="_blank">Download</a></td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+    <div class="section shippingSection">
+      <h3 class="title">Shipping</h3>
+      <div class="content">
+        <div class="recipientSection">
+          <div class="label">Recipient: </div>
+          <div>
+            <div>{{order.addressByShippingAddressId.firstName}} {{order.addressByShippingAddressId.lastName}}</div>
+          </div>
+        </div>
+        <div class="addressSection">
+          <div class="label">Recipient: </div>
+          <div>
+            <div>{{order.addressByShippingAddressId.line1}}</div>
+            <div *ngIf="order.addressByShippingAddressId.line2">{{order.addressByShippingAddressId.line2}}</div>
+            <div>{{order.addressByShippingAddressId.city}}, {{order.addressByShippingAddressId.country}}</div>
+            <div>{{order.addressByShippingAddressId.postcode}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-dashboard-wrapper>
+

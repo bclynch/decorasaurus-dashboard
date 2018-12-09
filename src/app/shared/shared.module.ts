@@ -14,11 +14,12 @@ import {
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatListModule
+  MatPaginatorModule
 } from '@angular/material';
+import { DashboardWrapperComponent } from './dashboard-wrapper/dashboard-wrapper.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [DashboardWrapperComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -33,7 +34,7 @@ import {
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
-    MatListModule
+    MatPaginatorModule
   ],
   exports: [
     MatButtonModule,
@@ -48,7 +49,8 @@ import {
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
-    MatListModule
+    DashboardWrapperComponent,
+    MatPaginatorModule
   ]
 })
 export class SharedModule { }
