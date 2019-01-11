@@ -1,0 +1,8 @@
+mutation authenticateUserProducer($email: String!, $password: String!) {
+  authenticateUserProducer(input:{
+    email: $email,
+    password: $password
+  }) {
+    jwtToken
+  }
+}

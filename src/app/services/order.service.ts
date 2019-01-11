@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
-import { APIService } from './api.service';
+import { AllOrdersGQL, OrderByIdGQL } from '../generated/graphql';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class OrderService {
 
   constructor(
-    private apiService: APIService,
+    private orderByIdGQL: OrderByIdGQL,
+    private allOrdersGQL: AllOrdersGQL
   ) {
 
   }
 
   getOrderById(orderId: string) {
-    return this.apiService.getOrderById(orderId);
+    return this.orderByIdGQL.watch({ orderId })
+      .valueChanges
+      .pipe(
+        map(result => result.data.orderById)
+      );
   }
 
   getAllOrders() {
-    return this.apiService.getAllOrders();
+    return this.allOrdersGQL.watch()
+      .valueChanges
+      .pipe(
+        map(result => result.data.allOrders.nodes)
+      );
   }
 }

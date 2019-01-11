@@ -1,0 +1,11 @@
+mutation registerUserProducer($email: String!, $password: String!) {
+  registerUserProducer(input: {
+    email: $email,
+    password: $password
+  })
+  {
+    customer {
+      id
+    }
+  }
+}

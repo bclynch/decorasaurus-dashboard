@@ -59,3 +59,15 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 - Web app uses a service worked so we need to break the cache when we update. Change the cache version in service-worker.js to do this and prompt users to do the same.
 - Run `$ ng build --prod` to run an AoT build
 - Use SFTP (cyber duck) to replace the www folder in /var/www/packonmyback.com/html on the server
+
+## Graphql / Apollo
+
+### Code Generation
+
+#### Run
+`$ npm run generate`
+
+#### Setup
+- Make sure both graphql-code-generator and graphql are installed globally for this to work.
+- Can run `$ gql-gen init` to get it working which will install some things and setup an npm script and codegen.yml file
+- Create schemas in the src/app/graphql folder for each and the script will pull from there and generate code in src/app/generated/graphql.ts

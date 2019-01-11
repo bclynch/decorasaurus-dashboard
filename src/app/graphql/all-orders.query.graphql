@@ -1,0 +1,13 @@
+query allOrders {
+  allOrders {
+    nodes {
+      id,
+      status,
+      shipping,
+      createdAt,
+      orderItemsByOrderId {
+        totalCount
+      }
+    }
+  }
+}
